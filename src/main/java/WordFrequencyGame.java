@@ -15,7 +15,7 @@ public class WordFrequencyGame {
 
                 List<WordsInfo> wordsInfoList = separateSentenceToWordsInfo(sentence);
 
-                wordsInfoList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
+                sortWordsInfoList(wordsInfoList);
 
                 StringJoiner joiner = new StringJoiner("\n");
                 for (WordsInfo wordInfo : wordsInfoList) {
@@ -29,6 +29,10 @@ public class WordFrequencyGame {
                 return "Calculate Error";
             }
         }
+    }
+
+    private void sortWordsInfoList(List<WordsInfo> wordsInfoList) {
+        wordsInfoList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
     }
 
     private List<WordsInfo> separateSentenceToWordsInfo(String sentence) {
