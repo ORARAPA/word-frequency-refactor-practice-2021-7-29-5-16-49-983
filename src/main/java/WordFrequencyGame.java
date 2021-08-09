@@ -6,21 +6,14 @@ public class WordFrequencyGame {
 
     public String getResult(String sentence){
 
-
         if (sentence.split(BlANK_SPACE).length==1) {
             return sentence + " 1";
         } else {
-
             try {
-
                 List<WordsInfo> wordsInfoList = separateSentenceToWordsInfo(sentence);
-
                 sortWordsInfoList(wordsInfoList);
-
                 return getStringOutput(wordsInfoList);
             } catch (Exception e) {
-
-
                 return "Calculate Error";
             }
         }
@@ -71,12 +64,10 @@ public class WordFrequencyGame {
                 arr.add(wordsInfo);
                 map.put(wordsInfo.getValue(), arr);
             }
-
             else {
                 map.get(wordsInfo.getValue()).add(wordsInfo);
             }
         }
-
 
         return map;
     }
