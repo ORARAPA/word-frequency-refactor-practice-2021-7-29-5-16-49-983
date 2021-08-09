@@ -6,12 +6,13 @@ public class WordFrequencyGame {
     public static final String BlANK_SPACE = "\\s+";
 
     public String getResult(String sentence){
+        List<WordsInfo> wordsInfoList;
 
         if (sentence.split(BlANK_SPACE).length==1) {
             return sentence + " 1";
         } else {
             try {
-                List<WordsInfo> wordsInfoList = calculateWordFrequency(sentence);
+                wordsInfoList = calculateWordFrequency(sentence);
                 sortWordsInfoList(wordsInfoList);
                 return getStringOutput(wordsInfoList);
             } catch (Exception e) {
