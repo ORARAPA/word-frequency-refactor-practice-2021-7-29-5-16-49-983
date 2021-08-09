@@ -13,24 +13,7 @@ public class WordFrequencyGame {
 
             try {
 
-                //split the input string with 1 to n pieces of spaces
-                String[] words = sentence.split(BlANK_SPACE);
-
-                List<WordsInfo> wordsInfoList = new ArrayList<>();
-                for (String word : words) {
-                    WordsInfo wordsInfo = new WordsInfo(word, 1);
-                    wordsInfoList.add(wordsInfo);
-                }
-
-                //get the map for the next step of sizing the same word
-                Map<String, List<WordsInfo>> map =getListMap(wordsInfoList);
-
-                List<WordsInfo> distinctWordsInfo = new ArrayList<>();
-                for (Map.Entry<String, List<WordsInfo>> entry : map.entrySet()){
-                    WordsInfo wordsInfo = new WordsInfo(entry.getKey(), entry.getValue().size());
-                    distinctWordsInfo.add(wordsInfo);
-                }
-                wordsInfoList = distinctWordsInfo;
+                List<WordsInfo> wordsInfoList = separateSentenceToWordsInfo(sentence);
 
                 wordsInfoList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
 
@@ -46,6 +29,28 @@ public class WordFrequencyGame {
                 return "Calculate Error";
             }
         }
+    }
+
+    private List<WordsInfo> separateSentenceToWordsInfo(String sentence) {
+        //split the input string with 1 to n pieces of spaces
+        String[] words = sentence.split(BlANK_SPACE);
+
+        List<WordsInfo> wordsInfoList = new ArrayList<>();
+        for (String word : words) {
+            WordsInfo wordsInfo = new WordsInfo(word, 1);
+            wordsInfoList.add(wordsInfo);
+        }
+
+        //get the map for the next step of sizing the same word
+        Map<String, List<WordsInfo>> map =getListMap(wordsInfoList);
+
+        List<WordsInfo> distinctWordsInfo = new ArrayList<>();
+        for (Map.Entry<String, List<WordsInfo>> entry : map.entrySet()){
+            WordsInfo wordsInfo = new WordsInfo(entry.getKey(), entry.getValue().size());
+            distinctWordsInfo.add(wordsInfo);
+        }
+        wordsInfoList = distinctWordsInfo;
+        return wordsInfoList;
     }
 
 
