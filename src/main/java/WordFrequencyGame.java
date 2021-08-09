@@ -4,15 +4,16 @@ import java.util.stream.Collectors;
 public class WordFrequencyGame {
 
     public static final String BlANK_SPACE = "\\s+";
+    List<WordsInfo> wordsInfoList;
 
     public String getResult(String sentence){
-        List<WordsInfo> wordsInfoList;
+
 
         if (sentence.split(BlANK_SPACE).length==1) {
             return sentence + " 1";
         } else {
             try {
-                wordsInfoList = calculateWordFrequency(sentence);
+                calculateWordFrequency(sentence);
                 sortWordsInfoList(wordsInfoList);
                 return getStringOutput(wordsInfoList);
             } catch (Exception e) {
@@ -34,7 +35,7 @@ public class WordFrequencyGame {
         wordsInfoList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
     }
 
-    private List<WordsInfo> calculateWordFrequency(String sentence) {
+    private void calculateWordFrequency(String sentence) {
         List<String> words = Arrays.asList(sentence.split(BlANK_SPACE));
         List<String> distinctWords = words.stream().distinct().collect(Collectors.toList());
 
@@ -44,7 +45,7 @@ public class WordFrequencyGame {
             WordsInfo wordsInfo = new WordsInfo(distinctWord,count);
             wordsInfos.add(wordsInfo);
         });
-        return wordsInfos;
+         this.wordsInfoList = wordsInfos;
     }
 
 
